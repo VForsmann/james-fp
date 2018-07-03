@@ -1,0 +1,80 @@
+<div class="col-md-6 offset-md-3">
+  <app-alert-closeable #SignUpCloseableAlert [style]="'danger'" [message]="errorMessage"></app-alert-closeable>
+  <span class="anchor" id="formRegister"></span>
+  <br class="mb-5">
+  <div class="card card-outline-secondary">
+    <div class="card-header">
+      <h3 class="mb-0">Sign Up</h3>
+    </div>
+    <div class="card-body">
+      <form #signOutForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="firstname" class="control-label">Firstname</label>
+          <input type="text" autofocus="autofocus" class="form-control" id="firstname" name="firstname" [(ngModel)]="user.firstname"
+            required #firstname="ngModel" placeholder="Firstname">
+          <div *ngIf="(firstname.dirty || firstname.touched) && !firstname.valid; else space"></div>
+          <app-error-message [control]="firstname" [message]="firstnameRequired" [error]="'required'"></app-error-message>
+        </div>
+        <div class="form-group">
+          <label for="lastname" class="control-label">Lastname</label>
+          <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="user.lastname" required #lastname="ngModel"
+            placeholder="Lastname">
+          <div *ngIf="(lastname.dirty || lastname.touched) && !lastname.valid; else space"></div>
+          <app-error-message [control]="lastname" [message]="lastnameRequired" [error]="'required'"></app-error-message>
+        </div>
+
+        <app-datepicker (save)="onSave($event)" [title]="'Birth'"></app-datepicker>
+        <span class="m-1"></span>
+
+        <div class="form-group">
+          <label for="email" class="control-label">Email</label>
+          <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" appEmail required #email="ngModel"
+            placeholder="Email">
+          <div *ngIf="(email.dirty || email.touched) && !email.valid; else space"></div>
+          <app-error-message [control]="email" [message]="emailRequired" [error]="'required'"></app-error-message>
+          <app-error-message [control]="email" [message]="noValidEmail" [error]="'appEmail'"></app-error-message>
+        </div>
+        <div ngModelGroup="passwords" #passwords="ngModelGroup" appEqualPasswords>
+          <div class="form-group">
+            <label for="password" class="control-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" appPassword required
+              #passwordA="ngModel" placeholder="Password">
+            <div *ngIf="(passwordA.dirty || passwordA.touched) && !passwordA.valid; else space"></div>
+            <app-error-message [control]="passwordA" [message]="passwordRequired" [error]="'required'"></app-error-message>
+            <app-error-message [control]="passwordA" [message]="passwordA?.errors?.appPassword?.value" [error]="'appPassword'"></app-error-message>
+          </div>
+          <div class="form-group">
+            <label for="passwordCheck" class="control-label">Verify</label>
+            <input type="password" class="form-control" id="passwordCheck" name="passwordCheck" [(ngModel)]="user.passwordCheck" appPassword
+              required #passwordB="ngModel" placeholder="Password (again)">
+            <div *ngIf="(passwordB.dirty || passwordB.touched) && (!passwordB.valid || passwords?.errors?.appEqualPasswords); else space"></div>
+            <app-error-message [control]="passwordB" [message]="passwordRequired" [error]="'required'"></app-error-message>
+            <app-error-message [control]="passwordB" [message]="passwordB?.errors?.appPassword?.value" [error]="'appPassword'"></app-error-message>
+            <div *ngIf="passwordB.valid">
+              <app-error-message [control]="passwords" [message]="passwordCheckInvalid" [error]="'appEqualPasswords'"></app-error-message>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!registerClicked; else loading">
+          <button [disabled]="!signOutForm.valid || !user.birth" type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br class="mb-5">
+</div>
+
+
+<!--  A little space, used when no app-error-message is shown - otherwise
+      the sign-in container would shrink and grow when messages appear -->
+<ng-template #space>
+  <span class="m-1"></span>
+</ng-template>
+
+
+<!--   A loading icon which is shown until the authentication is complete  -->
+<ng-template #loading>
+  <span>
+    <img src="/assets/loading.svg">
+  </span>
+</ng-template>

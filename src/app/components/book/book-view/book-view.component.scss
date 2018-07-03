@@ -1,0 +1,46 @@
+.wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.top {
+    background-color: rgb(230, 230, 230);
+    z-index: 5000;
+}
+
+.book {
+    font-size: 50px;
+    padding: 5px;
+}
+
+.bookName {
+    float: right;
+    right: 10px;
+    max-height: 100%;
+}
+
+.value {
+    color: green;
+    margin: 10px;
+}
+
+ul {
+    margin-left: 40px;
+}
+
+.navItem:hover{
+    .icons{
+        color: rgb(100,100,100);
+    }
+    .spanSpace{
+        color:rgb(100,100,100);
+    }
+}
+
+.spanSpace {
+    margin: 5px;
+}
+
+.icon {
+    cursor: pointer;
+}

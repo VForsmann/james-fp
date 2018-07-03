@@ -1,0 +1,29 @@
+.bs-callout {
+    padding: 5px;
+    border: 1px solid white;
+    border-left-width: 5px;
+    border-radius: 3px;    
+}
+.bs-callout-info {
+    border-left-color: lightgrey;
+}
+.iconStyle{
+    color:white; 
+    margin-right: 10px;
+}
+.cardStyle{
+    padding: 15px;
+    margin: 10px;
+}
+.membersStyle:hover{
+    color: black;
+}
+#members:hover{
+    cursor: pointer;
+}
+
+.totalStyle{
+    display: flex; 
+    align-items:center; 
+    justify-content: flex-end
+}

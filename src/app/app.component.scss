@@ -1,0 +1,29 @@
+.page-content {
+  flex-grow: 1;
+  transition: margin-left 0.45s;
+}
+
+.page-content-footer {
+  transition: margin-left 0.45s;
+}
+
+.myInnerContainer{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 76.5px;
+  min-width: 50rem;
+}
+
+.page-header{
+  height:10%;
+}
+
+#sidenav {
+  display: block;
+}
+
+.page-footer {
+  display: block;
+}
+
